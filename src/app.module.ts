@@ -8,9 +8,18 @@ import { BankingModule } from './modules/banking/banking.module';
 import { LoggerModule } from './modules/logger/logger.module';
 import { PersonalModule } from './modules/personal/personal.module';
 import { ProfessionModule } from './modules/profession/profession.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from './configs/config.module';
+import { ConfigService } from './configs/config.service';
 
+
+// Todo: move connexction string to env. 
 @Module({
   imports: [
+    ConfigModule,
+    MongooseModule.forRoot(
+      'mongodb+srv://admin_ob:nfWhcNmgKSBZTx24@cluster0.vud2m.mongodb.net/OnboardingDb?retryWrites=true&w=majority',
+    ),
     AccountModule,
     PersonalModule,
     BankingModule,

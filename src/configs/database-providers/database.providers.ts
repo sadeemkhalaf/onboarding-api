@@ -1,19 +1,9 @@
-import { createConnection } from 'typeorm';
+import * as mongoose from 'mongoose';
 
 export const databaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',
-    useFactory: async () => await createConnection({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'test',
-      entities: [
-          __dirname + '/../**/*.entity{.ts,.js}',
-      ],
-      synchronize: true, /*only for testing*/
-    }),
+    useFactory: (): Promise<typeof mongoose> =>
+      mongoose.connect('mongodb+srv://<username>:<password>@cluster0.vud2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'),
   },
 ];
